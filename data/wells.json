@@ -1,0 +1,11 @@
+[
+	{"value": "1", 
+	 "label": "Well 1 New Zealand",
+	 "coordinates": [-35.113186, 173.263392]},
+	{"value": "2", 
+	 "label": "Well 2 Boston",
+	 "coordinates": [42.382598, -71.108788]},
+	{"value": "3",
+	 "label": "Well 3 Denver",
+	 "coordinates": [39.729242, -104.995062]}
+]

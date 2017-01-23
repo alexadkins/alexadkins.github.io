@@ -18,19 +18,31 @@
 
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					Choose Node
+					<h4>Choose Node</h4>
 					<div class="ui-widget">
-						<label for="create-node">Nodes: </label>
-						<input id="create-node">
+						<label for="select-node">Nodes: </label>
+						<input id="select-node">
 					</div>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					Choose Well
+					<h4>Choose Well</h4>
+					<div class="ui-widget">
+						<label for="select-well">Wells: </label>
+						<input id="select-wel">
+					</div>
 				</div>
 			</div>
+
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="button"> Save</div>
+				</div>
+			</div>
+
+
 
 		</div>	
 
@@ -39,19 +51,12 @@
 		<script src="js/jquery-ui.min.js"></script>
 
 		<script>
-			// $(function() {
-			// 	$.getJSON("data/nodes.json")
-			// });
-
-			var nodes = $.getJSON("data/nodes.json", function(nodes) {
-				console.log("getJSON success");
-				// console.log(nodes);
-			});
-			console.log("jsonNodes: ");
-			console.log(nodes);
-
-			$("#create-node").autocomplete({
+			$("#select-node").autocomplete({
 				source: "data/nodes.json"
+			});
+
+			$("#select-well").autocomplete({
+				source: "data/wells.json"
 			})
 		</script>
 	</body>
