@@ -4,6 +4,8 @@
 		<title>Create Bind</title>
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="css/jquery-ui.structure.min.css">
+		<link rel="stylesheet" href="css/jquery-ui.theme.min.css">
 		<link rel="stylesheet" href="css/main.css">
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet">
 	</head>
@@ -17,6 +19,10 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					Choose Node
+					<div class="ui-widget">
+						<label for="create-node">Nodes: </label>
+						<input id="create-node">
+					</div>
 				</div>
 			</div>
 
@@ -28,8 +34,25 @@
 
 		</div>	
 
-
+		<script src="js/jquery-3.1.1.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
-		<script src="jquery-3.1.1.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
+
+		<script>
+			// $(function() {
+			// 	$.getJSON("data/nodes.json")
+			// });
+
+			var nodes = $.getJSON("data/nodes.json", function(nodes) {
+				console.log("nodes: ");
+				console.log(nodes);
+			});
+			console.log("jsonNodes: ");
+			console.log(nodes);
+
+			// $("#create-node").autocomplete({
+			// 	source: $.getJSON("data/nodes.json")
+			// })
+		</script>
 	</body>
 </html>
