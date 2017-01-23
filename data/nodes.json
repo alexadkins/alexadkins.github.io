@@ -1,12 +1,8 @@
-{
-	"nodes": {
-		"items": [
-			{"id": "abc123", 
-			 "name": "Node 1"},
-			{"id": "EW16R", 
-			 "name": "Node 2"},
-			{"id": "xyz321",
-			 "name": "Node 3"}
-		]
-	}
-}
+[
+	{"value": "abc123", 
+	 "label": "Node 1"},
+	{"value": "EW16R", 
+	 "label": "Node 2"},
+	{"value": "xyz321",
+	 "label": "Node 3"}
+]
