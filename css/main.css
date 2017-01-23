@@ -1,0 +1,82 @@
+
+/*
+scss varibles (unused)
+$dark: #333333;
+$mid: #034f73;
+$light: #ddebf4;
+*/
+
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	color: #333333;
+	background-color: #ddebf4;
+}
+
+h1, h2, h3, h4 {
+	font-family: 'Raleway', sans-serif;
+	color: #034f73;
+}
+
+
+/* Bootstrap Styling */
+.row {
+	text-align: center;
+}
+
+
+/* General styling */
+.header {
+	background-color: #333333;
+	color: #ddebf4;
+}
+
+
+/* Button CSS */
+/*
+.button {
+	background-color: #333333;
+	color: #ddebf4;
+	text-align: center;
+	text-decoration: none;
+	border: none;
+	padding: 3px 0px 3px 0px;
+	margin-top: 20px;
+	box-shadow: 0 0 2px rgba(0,0,0,0.15);
+	transition: all 0.1s ease-in-out;
+	outline: none;
+	width: 100%;
+}
+
+.btn-default, .btn-default:active,  .btn-default:focus {
+	background-color: #333333;
+	color: #ddebf4 !important;
+	outline: none;
+	border-color: #333333;
+	box-shadow: 0 0 2px rgba(0,0,0,0.15);
+	transition: all 0.1s ease-in-out;
+}
+
+.open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover {
+	background-color: #333333;
+	color: #ddebf4 !important;
+	outline: none;
+	border-color: #333333;
+	box-shadow: 0 0 2px rgba(0,0,0,0.15);
+	transition: all 0.1s ease-in-out;
+}
+
+
+.btn-group .btn {
+	box-shadow: none;
+}
+
+.button:hover, .btn:hover, .btn:hover:active {
+	background-color: #333333;
+	color: #ddebf4;
+	border-color: #333333;
+	text-decoration: none;
+	transform: scale(1.05, 1.05);
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+	outline: none;
+}

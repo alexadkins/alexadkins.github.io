@@ -1,0 +1,23 @@
+$dark: #333333;
+$mid: #034f73;
+$light: #ddebf4;
+
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	color: $dark;
+	background-color: $light;
+}
+
+.row {
+	text-align: center;
+}
+
+h1, h2, h3, h4 {
+	font-family: 'Raleway', sans-serif;
+	color: $mid;
+}
+
+
+/*font-family: 'Raleway', sans-serif;
+font-family: 'Open Sans', sans-serif;*/

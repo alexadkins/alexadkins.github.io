@@ -1,0 +1,12 @@
+{
+	"nodes": {
+		"items": [
+			{"id": "abc123", 
+			 "name": "Node 1"},
+			{"id": "EW16R", 
+			 "name": "Node 2"},
+			{"id": "xyz321",
+			 "name": "Node 3"}
+		]
+	}
+}
