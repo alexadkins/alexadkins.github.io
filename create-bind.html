@@ -44,14 +44,14 @@
 			// });
 
 			var nodes = $.getJSON("data/nodes.json", function(nodes) {
-				console.log("nodes: ");
-				console.log(nodes);
+				console.log("getJSON success");
+				// console.log(nodes);
 			});
 			console.log("jsonNodes: ");
 			console.log(nodes);
 
 			$("#create-node").autocomplete({
-				source: $.getJSON("data/nodes.json")
+				source: nodes;
 			})
 		</script>
 	</body>
