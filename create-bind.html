@@ -71,8 +71,13 @@
 															'Error: Your browser doesn\'t support geolocation.');
 			}
 
+			// Initialize wells data array
+			var autocompleteWellsData = [];
+
 			function initMap() {
 				var pos = {lat: -35.113186, lng: 173.263392};
+
+				var userPosInfoWindow = new google.maps.InfoWindow({map: map});
 
 				// Find user's current location
 				if (navigator.geolocation) {
@@ -82,22 +87,19 @@
 							lng: position.coords.longitude
 						};
 
-						infoWindow.setPosition(pos);
-						infoWindow.setContent('Your location.');
+						userPosInfoWindow.setPosition(pos);
+						userPosInfoWindow.setContent('Your location.');
 					}, function() {
-						handleLocationError(true, infoWindow, map.getCenter())	
+						handleLocationError(true, userPosInfoWindow, map.getCenter())
 					});
 				} else {
-					handleLocationError(false, infoWindow, map.getCenter())
+					handleLocationError(false, userPosInfoWindow, map.getCenter())
 				}
 
 				var map = new google.maps.Map(document.getElementById('map'), {
 					zoom: 4,
 					center: pos
 				});
-
-				// Retrieve and modify wells json
-				var autocompleteWellsData = [];
 
 				// Retrieve wells data
 				$.getJSON("data/wells.json", function(data) {
