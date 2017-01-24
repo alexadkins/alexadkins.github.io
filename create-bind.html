@@ -64,29 +64,10 @@
 
 		<script>
 			// Retrieve and modify wells json
-			// var autocompleteWellsJSON;
-			var mapsWellsJSON;
+			var autocompleteWellsData = [];
+			// var mapsWellsJSON;
 			// var wellsJSON = 
-			$.getJSON("data/wells.json", function(data) {
-				$.each(data, function(index, element) {
-					console.log("index");
-					console.log(index);
-					console.log("element");
-					console.log(element);
-				})
-				console.log("jsonData: ");
-				console.log(data);
-				
-			});
 
-			// Autocomplete for node input
-			$("#select-node").autocomplete({
-				source: "data/nodes.json"
-			});
-
-			$("#select-well").autocomplete({
-				source: "data/wells.json"
-			});
 
 			function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 				infoWindow.setPosition(pos);
@@ -109,14 +90,32 @@
 
 				var infoWindow = new google.maps.InfoWindow({map: map});
 
-				var marker = new google.maps.Marker({
-					position: myLatLng,
-					map: map,
-					title: 'Hello World!',
-					label: "Well 1"
-				});
+				// var marker = new google.maps.Marker({
+				// 	position: myLatLng,
+				// 	map: map,
+				// 	title: 'Hello World!',
+				// 	label: "Well 1"
+				// });
 
 				marker.addListener('click', function() {selectMarker()});
+
+				$.getJSON("data/wells.json", function(data) {
+					$.each(data, function(index, element) {
+						console.log("index");
+						console.log(index);
+						console.log("element");
+						console.log(element);
+						autocompleteWellsData.push({"label": element["label"], "value": element["value"]})
+
+						var marker = new google.maps.Marker({
+							position: {lat: element["lat"], lng: element["lng"]},
+							map: map,
+							label: element["label"]
+						})
+					})
+					console.log("jsonData: ");
+					console.log(data);
+				});
 
 				// Find user's current location
 				if (navigator.geolocation) {
@@ -136,6 +135,15 @@
 				}
 
 			};
+
+			// Autocomplete for node input
+			$("#select-node").autocomplete({
+				source: "data/nodes.json"
+			});
+
+			$("#select-well").autocomplete({
+				source: autocompleteWellsData
+			});
 
 		</script>
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpwGGT0KzQlw5WYKNJ5CBzSgPCyh4W44c&callback=initMap"></script>
