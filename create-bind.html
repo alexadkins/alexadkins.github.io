@@ -35,7 +35,7 @@
 					<h4>Choose Well</h4>
 					<div class="ui-widget">
 						<label for="select-well">Wells: </label>
-						<input id="select-wel">
+						<input id="select-well">
 					</div>
 				</div>
 			</div>
@@ -68,21 +68,26 @@
 				source: "data/nodes.json"
 			});
 
-			$.getJSON("data/wells.json", function(data) {
-				// Initialize wells autocomplete data array
-				var autocompleteWellsData = [];
-
-				$.each(data, function(index, element) {
-					// Add curated json data to array for wells autocomplete
-					autocompleteWellsData.push({"label": element["label"], "value": element["value"]})
-				});
-
-				// Autocomplete for well input
-				$("#select-well").autocomplete({
-					source: autocompleteWellsData
-				});
-
+			// Autocomplete for well input
+			$("#select-well").autocomplete({
+				source: "data/wells.json"
 			});
+
+			// $.getJSON("data/wells.json", function(data) {
+			// 	// Initialize wells autocomplete data array
+			// 	var autocompleteWellsData = [];
+
+			// 	$.each(data, function(index, element) {
+			// 		// Add curated json data to array for wells autocomplete
+			// 		autocompleteWellsData.push({"label": element["label"], "value": element["value"]})
+			// 	});
+
+			// 	// Autocomplete for well input
+			// 	$("#select-well").autocomplete({
+			// 		source: autocompleteWellsData
+			// 	});
+
+			// });
 
 			// Create google maps interface
 			function initMap() {
