@@ -8,6 +8,10 @@
 		<link rel="stylesheet" href="css/jquery-ui.theme.min.css">
 		<link rel="stylesheet" href="css/main.css">
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet">
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 
 	<body>
@@ -37,6 +41,14 @@
 			</div>
 
 			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3"></div>
+				<div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
+					<div id="map"></div>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3"></div>
+			</div>
+
+			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<div class="button"> Save</div>
 				</div>
@@ -51,13 +63,81 @@
 		<script src="js/jquery-ui.min.js"></script>
 
 		<script>
+			// Retrieve and modify wells json
+			// var autocompleteWellsJSON;
+			var mapsWellsJSON;
+			// var wellsJSON = 
+			$.getJSON("data/wells.json", function(data) {
+				$.each(data, function(index, element) {
+					console.log("index");
+					console.log(index);
+					console.log("element");
+					console.log(element);
+				})
+				console.log("jsonData: ");
+				console.log(data);
+				
+			});
+
+			// Autocomplete for node input
 			$("#select-node").autocomplete({
 				source: "data/nodes.json"
 			});
 
 			$("#select-well").autocomplete({
 				source: "data/wells.json"
-			})
+			});
+
+			function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+				infoWindow.setPosition(pos);
+				infoWindow.setContent(browserHasGeolocation ? 
+															'Error: The geolocation service failed.': 
+															'Error: Your browser doesn\'t support geolocation.');
+			}
+
+			function selectMarker() {
+				console.log("click marker!");
+			};
+
+			function initMap() {
+				var myLatLng = {lat: -35.113186, lng: 173.263392};
+
+				var map = new google.maps.Map(document.getElementById('map'), {
+					zoom: 4,
+					center: myLatLng
+				});
+
+				var infoWindow = new google.maps.InfoWindow({map: map});
+
+				var marker = new google.maps.Marker({
+					position: myLatLng,
+					map: map,
+					title: 'Hello World!',
+					label: "Well 1"
+				});
+
+				marker.addListener('click', function() {selectMarker()});
+
+				// Find user's current location
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(function(position) {
+						var pos = {
+							lat: position.coords.latitude,
+							lng: position.coords.longitude
+						};
+
+						infoWindow.setPosition(pos);
+						infoWindow.setContent('Your location.');
+					}, function() {
+						handleLocationError(true, infoWindow, map.getCenter())	
+					});
+				} else {
+					handleLocationError(false, infoWindow, map.getCenter())
+				}
+
+			};
+
 		</script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpwGGT0KzQlw5WYKNJ5CBzSgPCyh4W44c&callback=initMap"></script>
 	</body>
 </html>
