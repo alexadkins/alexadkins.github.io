@@ -76,8 +76,8 @@
 															'Error: Your browser doesn\'t support geolocation.');
 			}
 
-			function selectMarker() {
-				console.log("click marker!");
+			function selectMarker(label) {
+				console.log("click marker!", label);
 			};
 
 			function initMap() {
@@ -97,7 +97,7 @@
 				// 	label: "Well 1"
 				// });
 
-				marker.addListener('click', function() {selectMarker()});
+				// marker.addListener('click', function() {selectMarker()});
 
 				$.getJSON("data/wells.json", function(data) {
 					$.each(data, function(index, element) {
@@ -111,7 +111,9 @@
 							position: {lat: element["lat"], lng: element["lng"]},
 							map: map,
 							label: element["label"]
-						})
+						});
+
+						marker.addListener('click', function() {selectMarker(marker.label)});
 					})
 					console.log("jsonData: ");
 					console.log(data);
