@@ -63,12 +63,7 @@
 		<script src="js/jquery-ui.min.js"></script>
 
 		<script>
-			// Retrieve and modify wells json
-			var autocompleteWellsData = [];
-			// var mapsWellsJSON;
-			// var wellsJSON = 
-
-
+			// Notify user if browser can find their location
 			function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 				infoWindow.setPosition(pos);
 				infoWindow.setContent(browserHasGeolocation ? 
@@ -76,53 +71,13 @@
 															'Error: Your browser doesn\'t support geolocation.');
 			}
 
-			function selectMarker(label) {
-				console.log("click marker!", label);
-			};
-
 			function initMap() {
-				var myLatLng = {lat: -35.113186, lng: 173.263392};
-
-				var map = new google.maps.Map(document.getElementById('map'), {
-					zoom: 4,
-					center: myLatLng
-				});
-
-				var infoWindow = new google.maps.InfoWindow({map: map});
-
-				// var marker = new google.maps.Marker({
-				// 	position: myLatLng,
-				// 	map: map,
-				// 	title: 'Hello World!',
-				// 	label: "Well 1"
-				// });
-
-				// marker.addListener('click', function() {selectMarker()});
-
-				$.getJSON("data/wells.json", function(data) {
-					$.each(data, function(index, element) {
-						console.log("index");
-						console.log(index);
-						console.log("element");
-						console.log(element);
-						autocompleteWellsData.push({"label": element["label"], "value": element["value"]})
-
-						var marker = new google.maps.Marker({
-							position: {lat: element["lat"], lng: element["lng"]},
-							map: map,
-							label: element["label"]
-						});
-
-						marker.addListener('click', function() {selectMarker(marker.label)});
-					})
-					console.log("jsonData: ");
-					console.log(data);
-				});
+				var pos = {lat: -35.113186, lng: 173.263392};
 
 				// Find user's current location
 				if (navigator.geolocation) {
 					navigator.geolocation.getCurrentPosition(function(position) {
-						var pos = {
+						pos = {
 							lat: position.coords.latitude,
 							lng: position.coords.longitude
 						};
@@ -136,6 +91,37 @@
 					handleLocationError(false, infoWindow, map.getCenter())
 				}
 
+				var map = new google.maps.Map(document.getElementById('map'), {
+					zoom: 4,
+					center: pos
+				});
+
+				// Retrieve and modify wells json
+				var autocompleteWellsData = [];
+
+				// Retrieve wells data
+				$.getJSON("data/wells.json", function(data) {
+					$.each(data, function(index, element) {
+						// Add curated json data to array for wells autocomplete
+						autocompleteWellsData.push({"label": element["label"], "value": element["value"]})
+
+						// Create marker for each well
+						var marker = new google.maps.Marker({
+							position: {lat: element["lat"], lng: element["lng"]},
+							map: map
+						});
+
+						// Create info window with well name for marker
+						var infoWindow = new google.maps.InfoWindow({
+							content: element["label"]
+						});
+
+						// Bring up well label when marker clicked on
+						marker.addListener('click', function() {
+							infoWindow.open(map, marker)
+						});
+					})
+				});
 			};
 
 			// Autocomplete for node input
@@ -143,6 +129,7 @@
 				source: "data/nodes.json"
 			});
 
+			// Autocomplete for well input
 			$("#select-well").autocomplete({
 				source: autocompleteWellsData
 			});
