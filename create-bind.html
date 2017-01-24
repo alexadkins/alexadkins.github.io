@@ -63,21 +63,11 @@
 		<script src="js/jquery-ui.min.js"></script>
 
 		<script>
-			// Notify user if browser can find their location
-			function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-				infoWindow.setPosition(pos);
-				infoWindow.setContent(browserHasGeolocation ? 
-															'Error: The geolocation service failed.': 
-															'Error: Your browser doesn\'t support geolocation.');
-			}
-
 			// Initialize wells data array
 			var autocompleteWellsData = [];
 
 			function initMap() {
 				var pos = {lat: -35.113186, lng: 173.263392};
-
-				var userPosInfoWindow = new google.maps.InfoWindow({map: map});
 
 				// Find user's current location
 				if (navigator.geolocation) {
@@ -87,13 +77,17 @@
 							lng: position.coords.longitude
 						};
 
-						userPosInfoWindow.setPosition(pos);
-						userPosInfoWindow.setContent('Your location.');
+						var userMarker = new google.maps.Marker({
+							position: pos,
+							map: map,
+							icon: "data/locationMarker.png"
+						});
+
 					}, function() {
-						handleLocationError(true, userPosInfoWindow, map.getCenter())
+						alert("Error: the geolocation service failed.");
 					});
 				} else {
-					handleLocationError(false, userPosInfoWindow, map.getCenter())
+					alert("Error: Your browser doesn\'t support geolocation.");
 				}
 
 				var map = new google.maps.Map(document.getElementById('map'), {
