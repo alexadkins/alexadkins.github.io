@@ -63,9 +63,28 @@
 		<script src="js/jquery-ui.min.js"></script>
 
 		<script>
-			// Initialize wells data array
-			var autocompleteWellsData = [];
+			// Autocomplete for node input
+			$("#select-node").autocomplete({
+				source: "data/nodes.json"
+			});
 
+			$.getJSON("data/wells.json", function(data) {
+				// Initialize wells autocomplete data array
+				var autocompleteWellsData = [];
+
+				$.each(data, function(index, element) {
+					// Add curated json data to array for wells autocomplete
+					autocompleteWellsData.push({"label": element["label"], "value": element["value"]})
+				});
+
+				// Autocomplete for well input
+				$("#select-well").autocomplete({
+					source: autocompleteWellsData
+				});
+
+			});
+
+			// Create google maps interface
 			function initMap() {
 				var pos = {lat: -35.113186, lng: 173.263392};
 
@@ -119,16 +138,6 @@
 					})
 				});
 			};
-
-			// Autocomplete for node input
-			$("#select-node").autocomplete({
-				source: "data/nodes.json"
-			});
-
-			// Autocomplete for well input
-			$("#select-well").autocomplete({
-				source: autocompleteWellsData
-			});
 
 		</script>
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpwGGT0KzQlw5WYKNJ5CBzSgPCyh4W44c&callback=initMap"></script>
