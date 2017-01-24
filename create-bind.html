@@ -73,22 +73,6 @@
 				source: "data/wells.json"
 			});
 
-			// $.getJSON("data/wells.json", function(data) {
-			// 	// Initialize wells autocomplete data array
-			// 	var autocompleteWellsData = [];
-
-			// 	$.each(data, function(index, element) {
-			// 		// Add curated json data to array for wells autocomplete
-			// 		autocompleteWellsData.push({"label": element["label"], "value": element["value"]})
-			// 	});
-
-			// 	// Autocomplete for well input
-			// 	$("#select-well").autocomplete({
-			// 		source: autocompleteWellsData
-			// 	});
-
-			// });
-
 			// Create google maps interface
 			function initMap() {
 				var pos = {lat: -35.113186, lng: 173.263392};
@@ -122,8 +106,6 @@
 				// Retrieve wells data
 				$.getJSON("data/wells.json", function(data) {
 					$.each(data, function(index, element) {
-						// Add curated json data to array for wells autocomplete
-						autocompleteWellsData.push({"label": element["label"], "value": element["value"]})
 
 						// Create marker for each well
 						var marker = new google.maps.Marker({
